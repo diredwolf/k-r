@@ -1,0 +1,13 @@
+# Blacklist everything
+*
+# Whitelist all directories except .vscode/
+!*/
+.vscode
+# Whitelist the file you're interested in.
+!*.c
+!*.h
+!*.md
+!Makefile
+!.clang-format
+!.gitignore
+!LICENSE
