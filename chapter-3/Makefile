@@ -1,16 +1,33 @@
-CC := clang
-CFLAGS :=  -O0 -std=c89 -Wall -Wextra -Werror -Wformat=2 -Wunused-variable -Wno-implicit-int -Wno-return-type -pedantic
-BIN := exe/
+# If necessary we can use $(info VARIABLE:$(VARIABLE)) to debug.
+# We can also use make -d.
 
-.PHONY: all clean
+CC			:=	cc
+RM			:=	rm
 
-all:
-	$(CC) $(CFLAGS) exercise-2-1.c -o $(BIN)exercise-3-1.exe
-	$(CC) $(CFLAGS) exercise-2-2.c -o $(BIN)exercise-3-2.exe
-	$(CC) $(CFLAGS) exercise-2-3.c -o $(BIN)exercise-3-3.exe
-	$(CC) $(CFLAGS) exercise-2-4.c -o $(BIN)exercise-3-4.exe
-	$(CC) $(CFLAGS) exercise-2-5.c -o $(BIN)exercise-3-5.exe
-	$(CC) $(CFLAGS) exercise-2-6.c -o $(BIN)exercise-3-6.exe
+CFLAGS		:=	-std=c89 -Wall -Wextra -Werror -pedantic
+RMFLAGS		:=	-f
+
+SRCDIR		:=	src
+BINDIR		:=	bin
+
+# Edit the $(HEADERS) variable as necessary.
+COMPILE.c	:=	$(CC) $(CFLAGS)
+REMOVE		:=	$(RM) $(RMFLAGS)
+
+SRCS		:=	$(wildcard $(SRCDIR)/*.c)
+PROGRAMS	:=	$(patsubst $(SRCDIR)/%.c, %, $(SRCS))
+
+PROGRAMS	:=	$(addprefix $(BINDIR)/, $(PROGRAMS))
+
+all: $(PROGRAMS)
+
+$(BINDIR)/%: $(SRCDIR)/%.c
+	@mkdir -p $(@D)
+	$(COMPILE.c) -o $@ $<
 
 clean:
-	rm exe/*
+	$(REMOVE) $(PROGRAMS)
+
+re: clean all
+
+.PHONY:	all clean re

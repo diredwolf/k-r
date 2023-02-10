@@ -11,9 +11,9 @@ I will try to provide a list of helpful resources at the the end of the README.
 
 + Write in ANSI C (C89).
 + Be pedantic; turn on essentially all warnings.
-    #+begin_src sh
-    cc -O0 -std=c89 -Wall -Wextra -Werror -Wformat=2 -Wunused-variable -Wno-implicit-int -Wno-return-type -pedantic
-  #+end_src
+#+begin_src sh
+	cc -O0 -std=c89 -Wall -Wextra -Werror -Wformat=2 -Wunused-variable -Wno-implicit-int -Wno-return-type -pedantic
+#+end_src
 + For a given problem, use only techniques that have already been covered. If a
   more convenient technique or function has been mentioned but not yet
   explained, it is permissible to use it.
